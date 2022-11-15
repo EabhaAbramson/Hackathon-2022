@@ -12,6 +12,7 @@
    Serial1.print().
 */
 #include <Arduino.h>
+#include "datalogger_functions.h"
 
 int RXLED = 17;  // The RX LED has a defined Arduino pin
 // Note: The TX LED was not so lucky, we'll need to use pre-defined
