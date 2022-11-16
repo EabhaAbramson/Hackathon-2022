@@ -1,9 +1,12 @@
 #include <Arduino.h>
+#include <SFE_BMP180.h>
+#include <Wire.h>
 
 void hello(int three, int seven) {
     pinMode(7, OUTPUT);
 }
 
+SFE_BMP180 pressure;
 
 //BMP functions
 double getPressure()
