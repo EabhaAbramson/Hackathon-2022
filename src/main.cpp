@@ -13,12 +13,18 @@
 */
 #include <Arduino.h>
 #include "datalogger_functions.h"
+#include <SPIMemory.h>
+
+SPIFlash flash;
 
 int RXLED = 17;  // The RX LED has a defined Arduino pin
 // Note: The TX LED was not so lucky, we'll need to use pre-defined
 // macros (TXLED1, TXLED0) to control that.
 // (We could use the same macros for the RX LED too -- RXLED1,
 //  and RXLED0.)
+
+long strAddr = 0;
+String dataTest = " ";
 
 void setup()
 {
@@ -27,9 +33,12 @@ void setup()
 
   Serial.begin(9600); //This pipes to the serial monitor
   Serial.println("Initialize Serial Monitor");
-
+ 
   Serial1.begin(9600); //This is the UART, pipes to sensors attached to board
   Serial1.println("Initialize Serial Hardware UART Pins");
+
+  flash.begin();
+  
 }
 
 void loop()
@@ -44,4 +53,6 @@ void loop()
   digitalWrite(RXLED, HIGH);    // set the RX LED OFF
   TXLED1; //TX LED macro to turn LED ON
   delay(1000);              // wait for a second
+
+  flash.writeStr(strAddr, dataTest);
 }
